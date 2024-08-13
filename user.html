@@ -1,97 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Login</title>
+    <style>
+        body {
+            background-image: url('train2.jpg');
+            background-repeat: no-repeat;
+            background-size: 100vw 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .user {
+            position: absolute;
+            margin-left: 700px;
+            margin-top: 40px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .main {
+            width: 280px;
+            height: 300px;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10%;
+            opacity: 1;
+            margin-top: 200px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main input[type="text"],
+        .main input[type="password"] {
+            width: 200px;
+            height: 30px;
+            margin-bottom: 15px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .main input[type="submit"] {
+            width: 80px;
+            height: 30px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .main input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        span {
+            display: none;
+            color: red;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-<style>
-    span{
-        display: none;
-    }
-    .main{
-        width:280px;
-        height:300px;
-        background-color:antiquewhite;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10%;
-        opacity:1;
-        margin-top: 100px;
-    }
-    
-    body{
-        background-image: url(train2.jpg);
-        background-repeat: no-repeat;
-        background-size: 100vw 100vh;
-    }
-    .user{
-    position: absolute;
-    margin-left: 600px;
-    margin-top: 40px;
-    }
-   
-</style>
+
 <body>
     <center>
         <h2 class="user">USER LOGIN</h2>
 
-       
-    <div class="main">
-      
-
-        
-        <form>
-            <input type="text" placeholder="username" required>
-            <br>
-            <span>check the login details</span>
-        
-            <br>
-            <input type="password" placeholder="password" required>
-            <br>
-            <span>wrong password</span>
-            <br>
-            <br>
-            <input type="submit">
-        </form>
-    </div>
+        <div class="main">
+            <form>
+                <input type="text" placeholder="Username" required>
+                <span>Check the login details</span>
+                <input type="password" placeholder="Password" required>
+                <span>Wrong password</span>
+                <input type="submit" value="Login">
+            </form>
+        </div>
     </center>
+
     <script>
-        var d = document.forms;
+        var form = document.forms[0];
 
-        d[0].addEventListener("submit", function(e) {
+        form.addEventListener("submit", function (e) {
             e.preventDefault();
-            var sign = localStorage.getItem("user") || "[]"; 
-            var pg = JSON.parse(sign);
-            console.log(pg);
-
+            var storedUsers = JSON.parse(localStorage.getItem("user")) || [];
             var username = e.target[0].value;
             var password = e.target[1].value;
             var credentialsMatch = false;
 
-            for (let i = 0; i < pg.length; i++) {
-                let res = pg[i].user;
-                let pas = pg[i].pass;
-
-                if (username === res && password === pas) {
+            for (let i = 0; i < storedUsers.length; i++) {
+                if (username === storedUsers[i].user && password === storedUsers[i].pass) {
                     credentialsMatch = true;
                     break;
                 }
             }
 
             if (!credentialsMatch) {
-                let span = document.getElementsByTagName("span");
-                span[0].style.display = "inline";
-                span[0].style.color = "red";
+                let spans = document.getElementsByTagName("span");
+                spans[0].style.display = "inline";
+                spans[1].style.display = "inline";
             } else {
                 window.location.assign("./new.html");
             }
 
-            e.target[0].value = "";
-            e.target[1].value = "";
+            form.reset();
         });
     </script>
-    
 </body>
+
 </html>

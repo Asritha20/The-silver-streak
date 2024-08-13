@@ -4,71 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Silver Streak</title>
+    <style>
+        body {
+            background-image: url("./train.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: black;
+        }
+        .main {
+            width: 350px;
+            height: auto;
+            background-color: antiquewhite;
+            opacity: 0.9;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .main h1, .main h2 {
+            margin-bottom: 20px;
+        }
+        .main button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #f0e68c;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .main button:hover {
+            background-color: #e0c060;
+        }
+        .main a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .signup-link {
+            margin-top: 15px;
+            display: block;
+            font-size: 14px;
+        }
+    </style>
 </head>
-<style>
-    body{
-        background-image: url("./train.jpg");
-         background-repeat: no-repeat;
-         background-size:cover ;
-         
-    }
-    .one{
-        color:black;
-        margin-top: 30px;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-    }
-  
-
-.Aasi{
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    justify-content: center;
-    align-items: center;
-    margin-left: 620px;
-    margin-top: 40px;
-}
-button a{
-    text-decoration: none;
-    color: black;
-}
-.main{
-    width: 400px;
-    height: 200px;
-    background-color: antiquewhite;
-    opacity: 0.9;
-    margin-top: 170px;
-    border-radius: 10%;
-    
-
-}
-
-</style>
 <body>
-    
-    
-<center>
     <div class="main">
-    
-       
-            <h2 class="oo">Welcome to</h2>
-            <h1 class="one"> THE SILVER STREAK</h1>
-            <button><a href="./user.html">Login As User</a> </button>
-            <button> <a href="./admin.html"> Login As Admin</a></button>
-            <br>
-            <br>
-            <a href="./sign.html">Sign up</a>
-       
-     </div>
-     </center>
-    <!-- <div class="Aasi">
-<button><a href="./user.html">Login As User</a> </button>
-<br>
-<button> <a href="./admin.html"> Login As Admin</a></button>
-<br>
-
-<a href="./sign.html">Sign up</a>
-    </div> -->
+        <h2 class="oo">Welcome to</h2>
+        <h1 class="one">THE SILVER STREAK</h1>
+        <button><a href="./user.html">Login As User</a></button>
+        <button><a href="./admin.html">Login As Admin</a></button>
+        <a href="./sign.html" class="signup-link">Sign up</a>
+    </div>
 </body>
 </html>
