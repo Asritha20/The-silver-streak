@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        top: 0;
+    }
+    .main{
+        width: 100%;
+        height:50px;
+        background-color: aqua;
+    }
+    .nav{
+        line-height: 1.7;
+    }
+    .ma{
+        width: 500px;
+        height: 500px;
+        background-color: antiquewhite;
+
+    }
+    .ll{
+        width: 200px;
+        height: 200px;
+        background-color: burlywood;
+    }
+    .oo{
+        display: flex;
+        flex-wrap:wrap;
+        gap: 50px;
+        width: 500px;
+        height: 300px;
+        margin-top: 20px;
+        
+    }
+    .ii{
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        margin-left: 10px;
+    }
+</style>
+<body>
+    <div>
+        <div class="main">
+            <!-- <img src="https://img.freepik.com/premium-vector/train-logo-concept-icon-illustration_683738-2658.jpg" width="50px" alt=""> -->
+<center>
+    <h1 class="nav">SILVER STREAK</h1>
+</center>
+        </div>
+        <div style="height: fit-content;width:100%;background-color:beige;">
+        <marquee behavior="scroll" direction="left"><h1>
+            --Happy travel--
+        </h1></marquee>
+
+        </div>
+        <div style="display: flex;gap:50px;">
+        <div class="ma">
+            <div >
+                <!-- <h1>water_level :</h1> -->
+            <br>
+            <br>
+                <h2 ></h2>
+                <br>
+                <h2></h2>
+                
+            </div>
+        </div>
+    <div class="oo">
+        <div class="ll">
+            <h3>Live location</h3>
+            <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448193.9511061002!2d76.76353898983947!3d28.64428733575198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1723007812287!5m2!1sen!2sin" style="margin-left:10px;line-height:2px" width="180" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+       
+        </div>
+        <div class="ll">
+            <center><h3>Water Level</h3></center>
+            <form >
+            <br>
+            <br>
+            <input type="text"class="ii" placeholder="Enter Train No:">
+            <br>
+            <br>
+            <input type="text" class="ii" placeholder="Enter coach No :">
+            <br>
+            <br>
+            <input type="submit" class="ii">
+        </form>
+        </div>
+        <div class="ll">
+            <center><h3>Time to reach</h3>
+                <h3>-:Destination:-</h3>
+                </center>
+                <br>
+            <input type="text"class="ii" placeholder="Enter Train No:">
+            <br>
+            <br>
+            <input type="text" class="ii" placeholder="Destination :">
+            <br>
+            <br>
+            <input type="submit" class="ii">
+            <br>
+            <br>
+            <p class="ii">Expected time 00:00:00</p>
+        </div>
+        <div class="ll">
+         <center><h3>Emergency alert</h3></center>
+            <img src="./caution-sign.png" width="120px" style="margin-left: 35px;margin-top:20px;" alt="">
+        </div>
+        </div>
+    </div>
+</div>
+<script>
+    var d = document.forms;
+    console.log(d[0])
+
+    var arr = [];
+    d[0].addEventListener("submit", (e) => {
+        e.preventDefault();
+        obj={
+            user: e.target[0].value,
+            pp:e.target[1].value
+        }
+     
+        console.log(obj.user)
+        e.target[0].value = "",
+        e.target[1].value=""
+   
+
+let lep;
+let aasi;
+    async function peddi(){
+        const response=await fetch("https://3ao6hc8840.execute-api.ap-south-1.amazonaws.com/teststage")
+        const res=await response.json();
+        lep=res.body
+        console.log(lep);
+        for(var i=0;i<lep.length;i++){
+        
+        
+    }
+    console.log(lep[obj.user])
+    aasi=lep[obj.user].water_level;
+    var a=document.getElementsByTagName("h2");
+a[0].innerHTML="Water_level : "+lep[obj.user].water_level;
+var a=document.getElementsByTagName("h2");
+a[1].innerHTML="Message : "+lep[obj.user].message;
+    }
+    peddi();
+   
+
+
+
+})
+
+
+
+</script>
+</body>
+</html>
