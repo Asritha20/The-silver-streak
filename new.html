@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Streak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            width: 100%;
+            height: 50px;
+            background-color: aqua;
+        }
+        .nav {
+            line-height: 1.7;
+        }
+        .ma {
+            width: 500px;
+            height: 500px;
+            background-color: antiquewhite;
+            padding: 20px;
+        }
+        .ll {
+            width: 200px;
+            height: 200px;
+            background-color: burlywood;
+            padding: 10px;
+        }
+        .oo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            width: 500px;
+            height: 300px;
+            margin-top: 20px;
+        }
+        .ii {
+            width: 90%;
+            padding: 5px;
+            margin-left: 10px;
+            border: none;
+            border-bottom: 2px solid black;
+        }
+        h1, h2, h3, p {
+            margin: 10px 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="main">
+            <center><h1 class="nav">SILVER STREAK</h1></center>
+        </div>
+        <div style="height: fit-content;width:100%;background-color:beige;">
+            <marquee behavior="scroll" direction="left">
+                <h1>--Happy travel--</h1>
+            </marquee>
+        </div>
+        <div style="display: flex;gap:50px;">
+            <div class="ma">
+                <h1 style="color: red;">Water_level Information</h1>
+                <br>
+                <h3 id="water_level">Water Level: </h3>
+                <h3 id="message">Message: </h3>
+                <br>
+                <br><br>
+                <div id="details">
+                    <h1 style="color: red;">Time to Reach</h1>
+                     <br>
+                    <p><strong>Train ID:</strong> <span id="container-id"></span></p>
+                    <p><strong>Train_No:</strong> <span id="container_info"></span></p>
+                    <p><strong>Destination:</strong> <span id="location"></span></p> 
+                    <p><strong>Expected_time:</strong> <span id="humidity"></span></p>
+                </div>
+            </div>
+            <div class="oo">
+                <div class="ll">
+                    <h3>Live location</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448193.9511061002!2d76.76353898983947!3d28.64428733575198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1723007812287!5m2!1sen!2sin" 
+                    width="180" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="ll">
+                    <h3>Water Level</h3>
+                    <form id="waterForm">
+                        <input type="text" class="ii" placeholder="Enter coach No:">
+                        <input type="text" class="ii" placeholder="Enter train No:">
+                        <input type="submit" class="ii">
+                    </form>
+                </div>
+                <div class="ll">
+                    <h3>Time to reach</h3>
+                    <!-- <h3>-: Destination :-</h3> -->
+                    <form id="timeForm">
+                        <input type="text" class="ii" placeholder="Enter Train No:">
+                        <input type="text" class="ii" placeholder="Destination:">
+                        <input type="submit" class="ii">
+                    </form>
+                    <!-- <p class="ii">Expected time: <span id="expectedTime">00:00:00</span></p> -->
+                </div>
+                <div class="ll">
+                    <h3>Emergency alert</h3>
+                    <img src="./caution-sign.png" width="120px" style="margin-left: 35px;margin-top:20px;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const waterForm = document.getElementById('waterForm');
+        const timeForm = document.getElementById('timeForm');
+
+        waterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const coachNo = e.target[0].value;
+            const trainNo = e.target[1].value;
+            
+            async function fetchWaterLevel() {
+                try {
+                    const response = await fetch("https://3ao6hc8840.execute-api.ap-south-1.amazonaws.com/teststage");
+                    const data = await response.json();
+                    const trainData = data.body[coachNo];
+
+                    if (trainData) {
+                        document.getElementById('water_level').textContent = "Water Level: " + trainData.water_level;
+                        document.getElementById('message').textContent = "Message: " + trainData.message;
+                    } else {
+                        alert('Train not found');
+                    }
+                } catch (error) {
+                    console.error("Error fetching water level data:", error);
+                }
+            }
+
+            fetchWaterLevel();
+            waterForm.reset();
+        });
+
+        const trainData = [
+            { id: 't1', Train_No: '12345', Destination: 'Mumbai', Expected_time: '14:30:45'},
+            { id: 't2', Train_No: '67890', Destination: 'Delhi', Expected_time: '16:00:23'},
+            { id: 't3', Train_No: '11223', Destination: 'Kolkata', Expected_time: '18:15:00'},
+            { id: 't4', Train_No: '44556', Destination: 'Chennai', Expected_time: '20:45:00'},
+            { id: 't5', Train_No: '78901', Destination: 'Bengaluru', Expected_time: '22:30:34'},
+            { id: 't6', Train_No: '33445', Destination: 'Ahmedabad', Expected_time: '06:50:12'},
+        ];
+
+        timeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const trainNo = e.target[0].value;
+            const destination = e.target[1].value;
+            const train = trainData.find(d => d.Train_No === trainNo && d.Destination === destination);
+            
+            if (train) {
+                document.getElementById('container-id').textContent = train.id;
+                document.getElementById('container_info').textContent = train.Train_No;
+                document.getElementById('location').textContent = train.Destination;
+                document.getElementById('humidity').textContent = train.Expected_time;
+            } else {
+                alert('Train not found');
+            }
+
+            timeForm.reset();
+        });
+    </script>
+</body>
+</html>
